@@ -4,6 +4,7 @@ varying vec3 fColor;
 varying vec3 fNormal;
 varying vec3 fPosition;
 varying vec2 fTexCoord;
+
 uniform vec3 diffuseColor;
 uniform vec3 diffusePosition; // Titik sumber cahaya
 uniform vec3 ambientColor;
