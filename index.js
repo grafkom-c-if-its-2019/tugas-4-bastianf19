@@ -10,7 +10,6 @@
       // Get canvas element and check if WebGL enabled
       var canvas = document.getElementById("glcanvas");
       var gl = glUtils.checkWebGL(canvas);
-
       // Initialize the shaders and program
       var vertexShader = glUtils.getShader(gl, gl.VERTEX_SHADER, glUtils.SL.Shaders.v1.vertex)
       var fragmentShader = glUtils.getShader(gl, gl.FRAGMENT_SHADER, glUtils.SL.Shaders.v1.fragment);
@@ -69,19 +68,19 @@
           }
           switch (indices[i]) {
             case a:
-              Kubus.push((a - 2));
+              Kubus.push((a - 2) * 0.125);
               Kubus.push(0.0);
               break;
             case b:
-              Kubus.push((a - 2));
+              Kubus.push((a - 2) * 0.125);
               Kubus.push(1.0);
               break;
             case c:
-              Kubus.push((a - 1));
+              Kubus.push((a - 1) * 0.125);
               Kubus.push(1.0);
               break;
             case d:
-              Kubus.push((a - 1));
+              Kubus.push((a - 1) * 0.125);
               Kubus.push(0.0);
               break;
 
@@ -153,79 +152,43 @@
       document.addEventListener('keydown', onKeyDown);
 
       verGaris = [
-        0.25, 0.5, 0.1,   1.0, 0.6, 0.0,
-        0.25, -0.5, 0.7,  0.0, 1.0, 0.0,
-        0.3, -0.5, 0.7,   0.0, 1.0, 0.0,
-        0.3, 0.5, 0.1,    1.0, 0.6, 0.0,
+        0.2, 0.5,  0.0,   1.0, 0.6, 0.0,
+        0.325, 0.5, 0.0,   0.0, 1.0, 0.0,
+        0.2, -0.35, 0.0,   0.0, 1.0, 0.0,
+        0.325, -0.35,  0.0,   1.0, 0.6, 0.0,
       ];
-    // function DrawBFill() {
-    //   var fill1 = [
-    //     // x, y,        r, g, b
-        // 0.25, 0.5, 0.1, 1.0, 0.6,
-        // 0.25, -0.5, 0.7, 0.0, 1.0,
-        // 0.3, -0.5, 0.7, 0.0, 1.0,
-        // 0.3, 0.5, 0.1, 1.0, 0.6
-    //   ];
-    //   var fill2 = [
-    //     // x, y,        r, g, b
-    //     0.3, 0.5, 0.1, 1.0, 0.6,
-    //     0.4, 0.5, 0.7, 0.0, 1.0,
-    //     0.4, 0.4, 0.7, 0.0, 1.0,
-    //     0.3, 0.4, 0.1, 1.0, 0.6,
-    //   ];
-    //   var fill3 = [
-    //     // x, y,        r, g, b
-    //     0.3, 0.2, 0.1, 1.0, 0.6,
-    //     0.4, 0.2, 0.7, 0.0, 1.0,
-    //     0.4, -0.0001, 0.7, 0.0, 1.0,
-    //     0.3, -0.0001, 0.1, 1.0, 0.6
-    //   ];
-    //   var fill4 = [
-    //     // x, y,        r, g, b
-    //     0.3, -0.4, 0.1, 1.0, 0.6,
-    //     0.4, -0.4, 0.7, 0.0, 1.0,
-    //     0.4, -0.5, 0.7, 0.0, 1.0,
-    //     0.3, -0.5, 0.1, 1.0, 0.6
-    //   ];
-    //   var cir6 = [],
-    //     cir7 = [];
-    //   for (var m = 0.0; m <= 180; m += 1) {
-    //     var n = m * Math.PI / 180;
+      var lingAtas = [];
+      for (var m = 0.0; m <= 180; m += 1) {
+        var n = m * Math.PI / 180;
 
-    //     var ling3 = [
-    //       0.4 + Math.sin(n) * 0.25,
-    //       -0.2 + Math.cos(n) * 0.3, 0.1, 1.0, 0.6
-    //     ];
-    //     var vert2 = [
-    //       0.4 + Math.sin(n) * 0.2,
-    //       -0.2 + Math.cos(n) * 0.2, 0.7, 0.0, 1.0,
-    //       // 0,
-    //     ];
-    //     cir6 = cir6.concat(ling3);
-    //     cir6 = cir6.concat(vert2);
-    //   }
-    //   for (var m = 0.0; m <= 181; m += 1) {
-    //     var n = m * Math.PI / 180;
-    //     var ling4 = [
-    //       0.4 + Math.sin(n) * 0.15,
-    //       0.3 + Math.cos(n) * 0.2, 0.0, 1.0, 0.6,
-    //     ];
-    //     var vert3 = [
-    //       0.4 + Math.sin(n) * 0.10,
-    //       0.3 + Math.cos(n) * 0.10, 0.7, 0.0, 1.0,
-    //       // 0,
-    //     ];
-    //     cir7 = cir7.concat(ling4);
-    //     cir7 = cir7.concat(vert3);
-    //   }
-    //   DrawBuffer(gl.TRIANGLE_FAN, fill1, 4, program2);
-    //   DrawBuffer(gl.TRIANGLE_FAN, fill2, 4, program2);
-    //   DrawBuffer(gl.TRIANGLE_FAN, fill3, 4, program2);
-    //   DrawBuffer(gl.TRIANGLE_FAN, fill4, 4, program2);
-    //   DrawBuffer(gl.TRIANGLE_STRIP, cir6, 361, program2);
-    //   DrawBuffer(gl.TRIANGLE_STRIP, cir7, 361, program2);
-    // }  
-    
+        var ling1 = [
+          0.323 + Math.sin(n) * 0.3,
+          0.257 + Math.cos(n) * 0.24, 0.0,  0.1, 1.0, 0.6
+        ];
+        var ling2 = [
+          0.323 + Math.sin(n) * 0.2,
+          0.257 + Math.cos(n) * 0.14, 0.0, 0.7, 0.0, 1.0,
+          // 0,
+        ];
+        lingAtas = lingAtas.concat(ling1);
+        lingAtas = lingAtas.concat(ling2);
+      }
+      var lingBawah = [];
+      for (var m = 0.0; m <= 180; m += 1) {
+        var n = m * Math.PI / 180;
+
+        var ling3 = [
+          0.290 + Math.sin(n) * 0.3,
+          -0.132 + Math.cos(n) * 0.21, 0.0, 0.1, 1.0, 0.6
+        ];
+        var ling4 = [
+          0.290 + Math.sin(n) * 0.2,
+          -0.132 + Math.cos(n) * 0.11, 0.0, 0.7, 0.0, 1.0,
+          // 0,
+        ];
+        lingBawah = lingBawah.concat(ling3);
+        lingBawah = lingBawah.concat(ling4);
+      }
     function drawShapes(type,vertices,n) {
       
       var vertexBufferObject = gl.createBuffer();
@@ -318,7 +281,7 @@
 
     // Asynchronously load an image
     var image = new Image();
-    image.src = "images/txStainglass.bmp";
+    image.src = "images/selfie.bmp";
     image.addEventListener('load', function () {
       // Now that the image has loaded make copy it to the texture.
       gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -368,7 +331,7 @@
       ddLoc = gl.getUniformLocation(program, 'diffusePosition');
 
       acLoc = gl.getUniformLocation(program, 'ambientColor');
-      ac = glMatrix.vec3.fromValues(0.17, 0.40, 0.56);
+      ac = glMatrix.vec3.fromValues(0.17, 0.40, 0.190);
       gl.uniform3fv(acLoc, ac);
 
       // Uniform untuk modelMatrix vektor normal
@@ -376,67 +339,68 @@
 
       gl.clearColor(0.0, 0.0, 0.0, 1.0);
       gl.enable(gl.DEPTH_TEST);
-      function render() {
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        // Perhitungan modelMatrix untuk vektor normal
-        var nm = glMatrix.mat3.create();
-        glMatrix.mat3.normalFromMat4(nm, mm);
-        gl.uniformMatrix3fv(nmLoc, false, nm);
 
-        glMatrix.mat4.lookAt(vm,
-          [camera.x, camera.y, camera.z], // di mana posisi kamera (posisi)
-          [0.0, 0.0, -2.0], // ke mana kamera menghadap (vektor)
-          [0.0, 1.0, 0.0]  // ke mana arah atas kamera (vektor)
-        );
-        gl.uniformMatrix4fv(vmLoc, false, vm);
+    function render(){
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      // Perhitungan modelMatrix untuk vektor normal
+      var nm = glMatrix.mat3.create();
+      glMatrix.mat3.normalFromMat4(nm, mm);
+      gl.uniformMatrix3fv(nmLoc, false, nm);
+
+      glMatrix.mat4.lookAt(vm,
+        [camera.x, camera.y, camera.z], // di mana posisi kamera (posisi)
+        [0.0, 0.0, -2.0], // ke mana kamera menghadap (vektor)
+        [0.0, 1.0, 0.0]  // ke mana arah atas kamera (vektor)
+      );
+      gl.uniformMatrix4fv(vmLoc, false, vm);
 
 
-        gl.uniformMatrix4fv(mmLoc, false, mm);
-        if (trans[0] >= (0.7 - Math.abs(0.2 * 0.7 * scaleM))) X = -1.0;
-        else if (trans[0] <= (-0.7 + Math.abs(0.2 * 0.7 * scaleM))) X = 1.0;
-        trans[0] += 0.009 * X;
+      gl.uniformMatrix4fv(mmLoc, false, mm);
+      if (trans[0] >= (0.7 - Math.abs(0.2 * 0.7 * scaleM))) X = -1.0;
+      else if (trans[0] <= (-0.7 + Math.abs(0.2 * 0.7 * scaleM))) X = 1.0;
+      trans[0] += 0.009 * X;
 
-        if (trans[1] >= (0.7 - (0.3 * 0.7))) Y = -1.0;
-        else if (trans[1] <= (-0.7 + (0.3 * 0.7))) Y = 1.0;
-        trans[1] += 0.010 * Y;
+      if (trans[1] >= (0.7 - (0.3 * 0.7))) Y = -1.0;
+      else if (trans[1] <= (-0.7 + (0.3 * 0.7))) Y = 1.0;
+      trans[1] += 0.010 * Y;
 
-        if (trans[2] >= (0.7 - Math.abs(0.2 * 0.7 * scaleM))) Z = -1.0;
-        else if (trans[2] <= (-0.7 + Math.abs(0.2 * 0.7 * scaleM))) Z = 1.0;
-        trans[2] += 0.011 * Z;
+      if (trans[2] >= (0.7 - Math.abs(0.2 * 0.7 * scaleM))) Z = -1.0;
+      else if (trans[2] <= (-0.7 + Math.abs(0.2 * 0.7 * scaleM))) Z = 1.0;
+      trans[2] += 0.011 * Z;
 
-        flag = 0;
-        gl.uniform1i(flagUniformLocation, flag);
-        gl.uniform1i(fFlagUniformLocation, flag);
-        DrawBuffer(gl.TRIANGLES, Kubus, 30)
+      flag = 0;
+      gl.uniform1i(flagUniformLocation, flag);
+      gl.uniform1i(fFlagUniformLocation, flag);
+      DrawBuffer(gl.TRIANGLES, Kubus, 30)
 
-        gl.disableVertexAttribArray(vNormal);
-        gl.disableVertexAttribArray(vTexCoord);
+      gl.disableVertexAttribArray(vNormal);
+      gl.disableVertexAttribArray(vTexCoord);
 
-        //animasi refleksi
-        if (scaleM >= 1.0) melebar = -1.0;
-        else if (scaleM <= -1.0) melebar = 1.0;
+      //animasi refleksi
+      if (scaleM >= 1.0) melebar = -1.0;
+      else if (scaleM <= -1.0) melebar = 1.0;
 
-        scaleM += 0.0190 * melebar;
-        gl.uniform1f(scaleMLoc, scaleM);
+      scaleM += 0.0190 * melebar;
+      gl.uniform1f(scaleMLoc, scaleM);
 
-        // arah cahaya berdasarkan koordinat huruf
-        dd = glMatrix.vec3.fromValues(trans[0], trans[1], trans[2]);  // xyz
-        gl.uniform3fv(ddLoc, dd);
+      // arah cahaya berdasarkan koordinat huruf
+      dd = glMatrix.vec3.fromValues(trans[0], trans[1], trans[2]);  // xyz
+      gl.uniform3fv(ddLoc, dd);
 
-        flag = 1;
-        // Gambar Shapenya
-        gl.uniform1i(flagUniformLocation, flag);
-        gl.uniform1i(fFlagUniformLocation, flag);
-        // drawShapes(gl.TRIANGLE_STRIP, verGaris, 4);
-        // drawShapes(gl.TRIANGLE_STRIP, verticesBulat1, 362);
-        // drawShapes(gl.TRIANGLE_STRIP, verticesBulat2, 362);
+      flag = 1;
+      // Gambar Shapenya
+      gl.uniform1i(flagUniformLocation, flag);
+      gl.uniform1i(fFlagUniformLocation, flag);
+      drawShapes(gl.TRIANGLE_STRIP, verGaris, 4);
+      drawShapes(gl.TRIANGLE_STRIP, lingAtas, 361);
+      drawShapes(gl.TRIANGLE_STRIP, lingBawah, 361);
 
-        // drawShapes(gl.TRIANGLE_STRIP, vertices3,360);
-        gl.disableVertexAttribArray(vColor);
-        gl.enable(gl.DEPTH_TEST);
+      // drawShapes(gl.TRIANGLE_STRIP, vertices3,360);
+      gl.disableVertexAttribArray(vColor);
+      gl.enable(gl.DEPTH_TEST);
 
-        requestAnimationFrame(render);
-      }
+      requestAnimationFrame(render);
+    }
       render();
   }
 }

@@ -45,8 +45,8 @@ void main() {
     // Transfer posisi verteks
     fPosition = vPosition;
   }
-  else if(flag == 1){
-    gl_Position = projectionMatrix * viewMatrix * modelMatrix *TranslationMatrix * ScaleMatrix * vec4(vPosition, 1.0);
+  else if(flag == 1){ 
+    gl_Position = projectionMatrix * viewMatrix * modelMatrix  * TranslationMatrix * ScaleMatrix * vec4(vPosition, 1.0);
     fColor = vColor;
   }
 }
